@@ -95,9 +95,4 @@ class TestLogin(BaseClass):  # Inherit BaseClass
         lp.click_otp_login_cta()
         time.sleep(3)
         assert lp.invalid_otp_error_text()
-
-    
-# testing git
-    @pytest.mark.regression
-    def test_testinggit(self):
-        print("JayGpatel")
+        
