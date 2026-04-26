@@ -176,9 +176,10 @@ class Landing_page:
         self.proceed_button_is_enabled()
 
         proceed_button = self.driver.find_element(By.CSS_SELECTOR, self.LP_GI_proceed_CTA_CSS)
-        proceed_button.click()
-        print("✅ Clicked on Proceed CTA")
-        self.log.info("Clicked on Proceed CTA")
+        # Use JavaScript click to avoid ElementClickInterceptedException
+        self.driver.execute_script("arguments[0].click();", proceed_button)
+        print("✅ Clicked on Proceed CTA (via JS)")
+        self.log.info("Clicked on Proceed CTA (via JS)")
 
     # OTP Page Methods
 
