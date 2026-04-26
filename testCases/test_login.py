@@ -1,4 +1,5 @@
 import time
+import os
 
 from Utilities.ReadProperties import ReadConfig
 from pageObject.Landing_page import Landing_page
@@ -10,8 +11,10 @@ import logging
 @pytest.mark.usefixtures("setup")
 class TestLogin(BaseClass):  # Inherit BaseClass
     baseURL = ReadConfig.getApplicationUrl()
-    path = "/Users/jaypatel/PycharmProjects/NEAP Demo/TestData/NEAPusercredentials.xlsx"
-    sheetName = "NEAPCredentials"
+    # Get project root and join with relative path to TestData
+    project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    path = os.path.join(project_root, "TestData", "NEAPusercredentials.xlsx")
+    sheetName = "Sheet1"
 
     def setup_method(self, method):  # will run before each test
         self.log = logging.getLogger(__name__)

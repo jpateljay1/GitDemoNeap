@@ -13,7 +13,9 @@ def setup():
     yield driver
     driver.quit()
 
-SCREENSHOT_DIR = "/Users/jaypatel/PycharmProjects/NEAP Demo/Screenshots"
+# Define screenshot directory relative to project root
+project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+SCREENSHOT_DIR = os.path.join(project_root, "Screenshots")
 
 @pytest.hookimpl(hookwrapper=True)
 def pytest_runtest_makereport(item, call):

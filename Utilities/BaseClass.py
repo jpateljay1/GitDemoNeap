@@ -13,7 +13,9 @@ class BaseClass:
 
         if not logger.handlers:
             #  Define log directory and file
-            log_dir = "/Users/jaypatel/PycharmProjects/NEAP Demo/Logs"
+            # Use project root directory for logs
+            project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+            log_dir = os.path.join(project_root, "Logs")
             os.makedirs(log_dir, exist_ok=True)
 
             timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
@@ -45,7 +47,9 @@ class BaseClass:
     def take_screenshot(self, name):
         """Capture screenshot and save to Reports/Screenshots folder"""
         timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-        screenshot_dir = "/Users/jaypatel/PycharmProjects/NEAP Demo/Screenshots"
+        # Use project root directory for screenshots
+        project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        screenshot_dir = os.path.join(project_root, "Screenshots")
         os.makedirs(screenshot_dir, exist_ok=True)
         filepath = os.path.join(screenshot_dir, f"{name}_{timestamp}.png")
         self.driver.save_screenshot(filepath)
