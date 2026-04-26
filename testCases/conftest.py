@@ -1,14 +1,24 @@
-import pytest
 from selenium import webdriver
-import pytest
+from selenium.webdriver.chrome.options import Options
 import os
 import datetime
+import pytest
+
+def pytest_addoption(parser):
+    parser.addoption("--headless", action="store_true", help="Run tests in headless mode")
 
 
 
 @pytest.fixture()
-def setup():
-    driver = webdriver.Chrome()
+def setup(request):
+    chrome_options = Options()
+    if request.config.getoption("--headless"):
+        chrome_options.add_argument("--headless")
+        chrome_options.add_argument("--no-sandbox")
+        chrome_options.add_argument("--disable-dev-shm-usage")
+        chrome_options.add_argument("--window-size=1920,1080")
+
+    driver = webdriver.Chrome(options=chrome_options)
     driver.maximize_window()
     yield driver
     driver.quit()
