@@ -26,6 +26,9 @@ jobs:
     - name: Run Tests
       run: |
         mkdir -p Reports
+        echo "--- START OF Landing_page.py ---"
+        cat pageObject/Landing_page.py
+        echo "--- END OF Landing_page.py ---"
         python -m pytest testCases/test_login.py --headless -rA --color=yes --junitxml=Reports/result.xml --html=Reports/pytest_html_report.html --self-contained-html
 
     - name: Publish Test Results
