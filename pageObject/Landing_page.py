@@ -174,9 +174,12 @@ class Landing_page:
     def click_proceed_button(self):
         # First verify displayed and enabled before clicking
         self.proceed_button_is_enabled()
+        import time
+        time.sleep(1) # Small wait to ensure any overlays have settled
 
         proceed_button = self.driver.find_element(By.CSS_SELECTOR, self.LP_GI_proceed_CTA_CSS)
         # Use JavaScript click to avoid ElementClickInterceptedException
+        print(">>> EXECUTING JS CLICK ON PROCEED BUTTON <<<")
         self.driver.execute_script("arguments[0].click();", proceed_button)
         print("✅ Clicked on Proceed CTA (via JS)")
         self.log.info("Clicked on Proceed CTA (via JS)")
