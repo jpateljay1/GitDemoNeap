@@ -26,7 +26,14 @@ jobs:
     - name: Run Tests
       run: |
         mkdir -p Reports
-        python -m pytest testCases/test_login.py --headless -rA --html=Reports/pytest_html_report.html --self-contained-html
+        python -m pytest testCases/test_login.py --headless -rA --color=yes --junitxml=Reports/result.xml --html=Reports/pytest_html_report.html --self-contained-html
+
+    - name: Publish Test Results
+      uses: EnricoMi/publish-unit-test-result-action@v2
+      if: always()
+      with:
+        files: |
+          Reports/result.xml
 
     - name: Upload Test Report
       uses: actions/upload-artifact@v4
