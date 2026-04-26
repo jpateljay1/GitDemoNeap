@@ -25,10 +25,13 @@ jobs:
 
     - name: Run Tests
       run: |
+        mkdir -p Reports
         python -m pytest testCases/test_login.py --headless
 
     - name: Upload Test Report
       uses: actions/upload-artifact@v4
+      env:
+        FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
       if: always()
       with:
         name: pytest-report
