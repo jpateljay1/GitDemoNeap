@@ -26,7 +26,7 @@ jobs:
     - name: Run Tests
       run: |
         mkdir -p Reports
-        python -m pytest testCases/test_login.py --headless
+        python -m pytest testCases/test_login.py --headless -rA --html=Reports/pytest_html_report.html --self-contained-html
 
     - name: Upload Test Report
       uses: actions/upload-artifact@v4
